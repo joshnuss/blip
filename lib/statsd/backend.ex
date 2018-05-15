@@ -1,4 +1,4 @@
-defmodule Gather.Backend do
+defmodule StatsD.Backend do
   use GenServer
 
   @name __MODULE__

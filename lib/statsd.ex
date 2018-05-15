@@ -1,6 +1,6 @@
-defmodule Gather do
+defmodule StatsD do
   @moduledoc """
-  Documentation for Gather.
+  Documentation for StatsD.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Gather do
 
   ## Examples
 
-      iex> Gather.hello
+      iex> StatsD.hello
       :world
 
   """

@@ -1,4 +1,4 @@
-defmodule Gather.UDPServer do
+defmodule StatsD.UDPServer do
   use GenServer, restart: :permanent
 
   def start_link(port \\ 2052) do

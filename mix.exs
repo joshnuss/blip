@@ -1,9 +1,9 @@
-defmodule Gather.MixProject do
+defmodule StatsD.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :gather,
+      app: :statsd,
       version: "0.1.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule Gather.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Gather.Application, []}
+      mod: {StatsD.Application, []}
     ]
   end
 
