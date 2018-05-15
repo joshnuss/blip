@@ -2,6 +2,8 @@
 
 A fault-tolerant and concurrent StatsD server.
 
+![Supervision Tree](https://raw.githubusercontent.com/joshnuss/elixir-statsd/master/supervision-tree.jpg)
+
 ## Installation
 
 ```
