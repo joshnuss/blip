@@ -6,7 +6,8 @@ defmodule Gather.Application do
   def start(_type, _args) do
     children = [
       {Gather.UDPServer, 2052},
-      {Registry, keys: :unique, name: Gather.Registry}
+      {Registry, keys: :unique, name: Gather.Registry},
+      {DynamicSupervisor, strategy: :one_for_one, name: Gather.Metric.Supervisor}
     ]
 
     opts = [strategy: :one_for_one, name: Gather.Supervisor]
