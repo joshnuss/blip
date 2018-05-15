@@ -3,10 +3,10 @@ defmodule StatsD.Metric.Counter do
 
   @period 1000
 
-  def start_link(name={:via, Registry, {StatsD.Registry, tag}}) do
+  def start_link(name = {:via, Registry, {StatsD.Registry, tag}}) do
     state = %{
       tag: tag,
-      sum: 0,
+      sum: 0
     }
 
     GenServer.start_link(__MODULE__, state, name: name)

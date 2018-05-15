@@ -7,7 +7,7 @@ defmodule StatsD.CLI do
     OptionParser.parse(args)
   end
 
-  defp start(options={_, port, _}) do
+  defp start(options = {_, port, _}) do
     set_port(port)
 
     StatsD.Application.start(nil, nil)
