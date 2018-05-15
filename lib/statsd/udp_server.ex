@@ -1,7 +1,7 @@
 defmodule StatsD.UDPServer do
   use GenServer, restart: :permanent
 
-  def start_link(port \\ 2052) do
+  def start_link(port) do
     GenServer.start_link(__MODULE__, port)
   end
 
