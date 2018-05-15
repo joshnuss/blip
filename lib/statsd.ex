@@ -1,18 +1,18 @@
 defmodule StatsD do
-  @moduledoc """
-  Documentation for StatsD.
-  """
+  def record({:counter, name, count}) do
+    IO.puts "recording stat"
+  end
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> StatsD.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def record(text) do
+    Task.async fn ->
+      case String.split(text, "|") do
+        [name] ->
+          record({:counter, name, 1})
+        [name, "c"] ->
+          record({:counter, name, 1})
+        [name, "c", count] ->
+          record({:counter, name, count})
+      end
+    end
   end
 end

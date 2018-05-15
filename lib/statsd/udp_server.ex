@@ -10,8 +10,12 @@ defmodule StatsD.UDPServer do
   end
 
   def handle_info({:udp, socket, _address, _port, data}, socket) do
-    IO.puts("Received: #{String.trim data}")
+    StatsD.record(data)
 
+    {:noreply, socket}
+  end
+
+  def handle_info(_, socket) do
     {:noreply, socket}
   end
 end
