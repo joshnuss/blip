@@ -1,21 +1,24 @@
-# StatsD
+# StatsD Server
 
-**TODO: Add description**
+A fault-tolerant and concurrent StatsD server.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `statsd` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:statsd, "~> 0.1.0"}
-  ]
-end
+```
+hub clone joshnuss/elixir-statsd
+cd elixir-statsd
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/statsd](https://hexdocs.pm/statsd).
+## Running
 
+To run on port 2052
+
+```
+./statsd 2052
+```
+
+## Testing
+
+```
+echo "requests|c|99" | nc -u -w0 127.0.0.1 2052
+```
