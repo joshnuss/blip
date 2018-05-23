@@ -34,7 +34,7 @@ Send a single metric:
 echo "requests:99|c" | nc -u -w0 127.0.0.1 2052
 ```
 
-Send multiple metrics in one packets:
+Send multiple metrics in one packet:
 
 ```
 echo -e "withdrawal:2\ndeposit:3\n" | nc -u -w0 127.0.0.1 2052
