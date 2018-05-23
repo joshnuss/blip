@@ -1,6 +1,6 @@
 # StatsD Server
 
-A fault-tolerant and concurrent StatsD server.
+A fault-tolerant and concurrent StatsD server that follows the [specification](https://github.com/etsy/statsd/blob/master/docs/metric_types.md)
 
 ![Supervision Tree](https://raw.githubusercontent.com/joshnuss/elixir-statsd/master/supervision-tree.jpg)
 
@@ -27,6 +27,15 @@ To run on port 2052
 
 ## Testing
 
+
+Send a single metric:
+
 ```
-echo "requests|c|99" | nc -u -w0 127.0.0.1 2052
+echo "requests:99|c" | nc -u -w0 127.0.0.1 2052
+```
+
+Send multiple metrics in one packets:
+
+```
+echo -e "withdrawal:2\ndeposit:3\n" | nc -u -w0 127.0.0.1 2052
 ```
