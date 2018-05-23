@@ -8,6 +8,7 @@ defmodule StatsD do
   def record_text(text) do
     text
     |> String.split("\n")
+    |> Enum.map(&String.trim/1)
     |> Enum.each(&record_line_async/1)
   end
 
