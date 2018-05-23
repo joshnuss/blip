@@ -10,7 +10,7 @@ defmodule StatsD.UDPServer do
   end
 
   def handle_info({:udp, socket, _address, _port, data}, socket) do
-    StatsD.record(data)
+    StatsD.record_text(data)
 
     {:noreply, socket}
   end
