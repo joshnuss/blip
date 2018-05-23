@@ -15,6 +15,7 @@ defmodule StatsD do
     Task.async(fn -> record_line(text) end)
   end
 
+  defp record_line(""), do: nil
   defp record_line(text) do
     case text |> String.trim() |> String.split("|") do
       [kv] ->
