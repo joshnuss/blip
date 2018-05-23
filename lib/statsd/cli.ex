@@ -15,9 +15,10 @@ defmodule StatsD.CLI do
     :timer.sleep(:infinity)
   end
 
-  defp set_port([port]) do
-    Application.put_env(:statsd, :port, String.to_integer(port))
-  end
+  defp set_port([]), do: nil
+  defp set_port(ports) do
+    ports = Enum.map(ports, &String.to_integer/1)
 
-  defp set_port(_), do: nil
+    Application.put_env(:statsd, :port, ports)
+  end
 end
