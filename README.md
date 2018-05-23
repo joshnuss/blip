@@ -19,7 +19,7 @@ To run on port 2052
 ./statsd 2052
 ```
 
-### With multiple sockets
+### Running on multiple ports
 
 ```
 ./statsd 2052 2053
