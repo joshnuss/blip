@@ -7,8 +7,7 @@ A fault-tolerant and concurrent StatsD server that follows the [specification](h
 ## Installation
 
 ```
-hub clone joshnuss/elixir-statsd
-cd elixir-statsd
+mix escript.install github joshnuss/elixir-statsd
 ```
 
 ## Running
