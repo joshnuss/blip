@@ -6,7 +6,7 @@ defmodule StatsD do
     timing: StatsD.Metric.Timing,
   }
 
-  def record({type, name, count}) do
+  def record({type, name, count, tags}) do
     module = @types[type]
 
     {:ok, pid} = find_or_create(module, name)

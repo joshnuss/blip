@@ -19,31 +19,36 @@ defmodule StatsD.Parser do
 
   number_part = string(":") |> concat(number)
   type_part = string("|") |> concat(type)
+  tags_part = string("|#") |> concat(ascii_string([], min: 1))
 
-  defparsec :tokenize, bucket |> optional(number_part) |> optional(type_part)
+  defparsec :tokenize, bucket |> optional(number_part) |> optional(type_part) |> optional(tags_part)
 
   def parse(string) do
     case tokenize(string) do
       {:ok, data, _, _, _, _} ->
-        normalize(data)
+        normalize(data, {:counter, "", 1, []})
       oops ->
         IO.inspect(oops)
     end
   end
 
-  def normalize([bucket, ":", count, "|", type]) do
-    {@types[type], bucket, count}
+  def normalize([], acc) do
+    acc
   end
 
-  def normalize([bucket, "|", type]) do
-    {@types[type], bucket, 1}
+  def normalize(["|#", tags | t], {type, bucket, count, _tags}) do
+    normalize(t, {type, bucket, count, String.split(tags, ",")})
   end
 
-  def normalize([bucket, ":", count]) do
-    {:counter, bucket, count}
+  def normalize(["|", type | t], {_type, bucket, count, tags}) do
+    normalize(t, {@types[type], bucket, count, tags})
   end
 
-  def normalize([bucket]) do
-    {:counter, bucket, 1}
+  def normalize([":", count | t], {type, bucket, _count, tags}) do
+    normalize(t, {type, bucket, count, tags})
+  end
+
+  def normalize([bucket|t], {type, _bucket, count, tags}) do
+    normalize(t, {type, bucket, count, tags})
   end
 end
