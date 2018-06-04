@@ -50,8 +50,4 @@ defmodule StatsD.Metric.Timing do
 
     {:noreply, %{state | values: []}}
   end
-
-  def append(tag, value) do
-    GenServer.cast(tag, value)
-  end
 end

@@ -27,8 +27,4 @@ defmodule StatsD.Metric.Set do
 
     {:noreply, %{state | value: 0}}
   end
-
-  def append(tag, value) do
-    GenServer.cast(tag, value)
-  end
 end

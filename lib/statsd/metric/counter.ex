@@ -27,8 +27,4 @@ defmodule StatsD.Metric.Counter do
 
     {:noreply, %{state | sum: 0}}
   end
-
-  def append(tag, value) do
-    GenServer.cast(tag, value)
-  end
 end

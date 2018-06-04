@@ -27,9 +27,4 @@ defmodule StatsD.Metric.Guage do
 
     {:noreply, state}
   end
-
-  def append(tag, value) do
-    GenServer.cast(tag, value)
-  end
 end
-

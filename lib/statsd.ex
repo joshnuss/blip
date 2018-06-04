@@ -11,7 +11,7 @@ defmodule StatsD do
 
     {:ok, pid} = find_or_create(module, name)
 
-    module.append(pid, count)
+    GenServer.cast(pid, count)
   end
 
   def record_text(text) do
