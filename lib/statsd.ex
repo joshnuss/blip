@@ -18,22 +18,9 @@ defmodule StatsD do
 
   defp record_line(""), do: nil
   defp record_line(text) do
-    case text |> String.trim() |> String.split("|") do
-      [kv] ->
-        {bucket, value} = parse(kv)
-
-        record({:counter, bucket, value})
-
-      [kv, "c"] ->
-        {bucket, value} = parse(kv)
-
-        record({:counter, bucket, value})
-
-      [kv, "c", _sample_rate] ->
-        {bucket, value} = parse(kv)
-
-        record({:counter, bucket, value})
-    end
+    text
+    |> StatsD.Parser.parse()
+    |> record()
   end
 
   defp find_or_create(tag) do
@@ -44,13 +31,6 @@ defmodule StatsD do
       _ ->
         name = {:via, Registry, {StatsD.Registry, tag}}
         DynamicSupervisor.start_child(StatsD.Metric.Supervisor, {StatsD.Metric.Counter, name})
-    end
-  end
-
-  defp parse(kv) do
-    case String.split(kv, ":") do
-      [bucket] -> {bucket, 1}
-      [bucket, value] -> {bucket, String.to_integer(value)}
     end
   end
 end
