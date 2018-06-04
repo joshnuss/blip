@@ -1,14 +1,16 @@
 defmodule StatsD do
-  def record({:counter, name, count}) do
-    {:ok, pid} = find_or_create(StatsD.Metric.Counter, name)
+  @types %{
+    counter: StatsD.Metric.Counter,
+    guage: StatsD.Metric.Guage,
+    set: StatsD.Metric.Set,
+  }
 
-    StatsD.Metric.Counter.append(pid, count)
-  end
+  def record({type, name, count}) do
+    module = @types[type]
 
-  def record({:set, name, count}) do
-    {:ok, pid} = find_or_create(StatsD.Metric.Set, name)
+    {:ok, pid} = find_or_create(module, name)
 
-    StatsD.Metric.Set.append(pid, count)
+    module.append(pid, count)
   end
 
   def record_text(text) do
