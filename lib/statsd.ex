@@ -1,8 +1,14 @@
 defmodule StatsD do
   def record({:counter, name, count}) do
-    {:ok, pid} = find_or_create(name)
+    {:ok, pid} = find_or_create(StatsD.Metric.Counter, name)
 
     StatsD.Metric.Counter.append(pid, count)
+  end
+
+  def record({:set, name, count}) do
+    {:ok, pid} = find_or_create(StatsD.Metric.Set, name)
+
+    StatsD.Metric.Set.append(pid, count)
   end
 
   def record_text(text) do
@@ -23,14 +29,14 @@ defmodule StatsD do
     |> record()
   end
 
-  defp find_or_create(tag) do
+  defp find_or_create(mod, tag) do
     case Registry.lookup(StatsD.Registry, tag) do
       [{pid, _}] ->
         {:ok, pid}
 
       _ ->
         name = {:via, Registry, {StatsD.Registry, tag}}
-        DynamicSupervisor.start_child(StatsD.Metric.Supervisor, {StatsD.Metric.Counter, name})
+        DynamicSupervisor.start_child(StatsD.Metric.Supervisor, {mod, name})
     end
   end
 end
