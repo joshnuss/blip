@@ -4,7 +4,7 @@ defmodule StatsD.Parser do
   @types %{
     "c"  => :counter,
     "g"  => :guage,
-    "ms" => :timer,
+    "ms" => :timing,
     "s"  => :set
   }
 

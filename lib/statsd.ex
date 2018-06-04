@@ -3,6 +3,7 @@ defmodule StatsD do
     counter: StatsD.Metric.Counter,
     guage: StatsD.Metric.Guage,
     set: StatsD.Metric.Set,
+    timing: StatsD.Metric.Timing,
   }
 
   def record({type, name, count}) do
