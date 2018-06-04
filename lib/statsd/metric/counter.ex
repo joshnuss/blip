@@ -1,8 +1,6 @@
 defmodule StatsD.Metric.Counter do
   use GenServer
 
-  @period 1000
-
   def start_link(name = {:via, Registry, {StatsD.Registry, tag}}) do
     state = %{
       tag: tag,
@@ -13,7 +11,9 @@ defmodule StatsD.Metric.Counter do
   end
 
   def init(state) do
-    :timer.send_interval(@period, :flush)
+    period = Application.get_env(:statsd, :flush_period)
+
+    :timer.send_interval(period, :flush)
 
     {:ok, state}
   end
