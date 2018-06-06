@@ -1,7 +1,7 @@
-defmodule StatsD.Metric.Timing do
+defmodule Blip.Metric.Timing do
   use GenServer
 
-  def start_link(name = {:via, Registry, {StatsD.Registry, tag}}) do
+  def start_link(name = {:via, Registry, {Blip.Registry, tag}}) do
     state = %{
       tag: tag,
       values: []
@@ -11,7 +11,7 @@ defmodule StatsD.Metric.Timing do
   end
 
   def init(state) do
-    period = Application.get_env(:statsd, :flush_period)
+    period = Application.get_env(:blip, :flush_period)
 
     :timer.send_interval(period, :flush)
 
@@ -30,7 +30,7 @@ defmodule StatsD.Metric.Timing do
       average: 0,
     }
 
-    StatsD.Backend.persist({state.tag, :timing, report})
+    Blip.Backend.persist({state.tag, :timing, report})
 
     {:noreply, state}
   end
@@ -46,7 +46,7 @@ defmodule StatsD.Metric.Timing do
       average: (if count > 0, do: ( sum / count ), else: 0)
     }
 
-    StatsD.Backend.persist({state.tag, :timing, report})
+    Blip.Backend.persist({state.tag, :timing, report})
 
     {:noreply, %{state | values: []}}
   end

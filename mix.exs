@@ -1,9 +1,9 @@
-defmodule StatsD.MixProject do
+defmodule Blip.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :statsd,
+      app: :blip,
       version: "0.1.0",
       elixir: "~> 1.6",
       escript: escript(),
@@ -27,6 +27,6 @@ defmodule StatsD.MixProject do
   end
 
   defp escript do
-    [main_module: StatsD.CLI]
+    [main_module: Blip.CLI]
   end
 end

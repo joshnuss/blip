@@ -1,4 +1,4 @@
-defmodule StatsD.UDPServer do
+defmodule Blip.UDPServer do
   use GenServer, restart: :permanent
 
   def start_link(port) do
@@ -10,7 +10,7 @@ defmodule StatsD.UDPServer do
   end
 
   def handle_info({:udp, socket, _address, _port, data}, socket) do
-    StatsD.record_text(data)
+    Blip.record_text(data)
 
     {:noreply, socket}
   end

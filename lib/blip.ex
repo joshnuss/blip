@@ -1,9 +1,9 @@
-defmodule StatsD do
+defmodule Blip do
   @types %{
-    counter: StatsD.Metric.Counter,
-    guage: StatsD.Metric.Guage,
-    set: StatsD.Metric.Set,
-    timing: StatsD.Metric.Timing,
+    counter: Blip.Metric.Counter,
+    guage: Blip.Metric.Guage,
+    set: Blip.Metric.Set,
+    timing: Blip.Metric.Timing,
   }
 
   def record({type, name, count, tags}) do
@@ -28,18 +28,18 @@ defmodule StatsD do
   defp record_line(""), do: nil
   defp record_line(text) do
     text
-    |> StatsD.Parser.parse()
+    |> Blip.Parser.parse()
     |> record()
   end
 
   defp find_or_create(mod, tag) do
-    case Registry.lookup(StatsD.Registry, tag) do
+    case Registry.lookup(Blip.Registry, tag) do
       [{pid, _}] ->
         {:ok, pid}
 
       _ ->
-        name = {:via, Registry, {StatsD.Registry, tag}}
-        DynamicSupervisor.start_child(StatsD.Metric.Supervisor, {mod, name})
+        name = {:via, Registry, {Blip.Registry, tag}}
+        DynamicSupervisor.start_child(Blip.Metric.Supervisor, {mod, name})
     end
   end
 end

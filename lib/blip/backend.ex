@@ -1,4 +1,4 @@
-defmodule StatsD.Backend do
+defmodule Blip.Backend do
   use GenServer
 
   @name __MODULE__

@@ -1,4 +1,4 @@
-defmodule StatsD.CLI do
+defmodule Blip.CLI do
   def main(args \\ []) do
     args |> parse |> start
   end
@@ -7,15 +7,15 @@ defmodule StatsD.CLI do
     OptionParser.parse(args)
   end
 
-  defp start(options = {[version: true], _, _}) do
-    {:ok, vsn} = :application.get_key(:statsd, :vsn)
+  defp start({[version: true], _, _}) do
+    {:ok, vsn} = :application.get_key(:blip, :vsn)
 
     IO.puts("v#{vsn}")
   end
 
-  defp start(options = {[help: true], _, _}) do
+  defp start({[help: true], _, _}) do
     IO.puts """
-    USAGE: statsd <portA> <portB> ... <portN> [options]
+    USAGE: blip <portA> <portB> ... <portN> [options]
 
     Default port is 2052
 
@@ -28,10 +28,10 @@ defmodule StatsD.CLI do
     """
   end
 
-  defp start(options = {_, port, _}) do
+  defp start({_, port, _}) do
     set_port(port)
 
-    StatsD.Application.start(nil, nil)
+    Blip.Application.start(nil, nil)
 
     :timer.sleep(:infinity)
   end
@@ -40,6 +40,6 @@ defmodule StatsD.CLI do
   defp set_port(ports) do
     ports = Enum.map(ports, &String.to_integer/1)
 
-    Application.put_env(:statsd, :port, ports)
+    Application.put_env(:blip, :port, ports)
   end
 end

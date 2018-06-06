@@ -1,4 +1,4 @@
-defmodule StatsD.Parser do
+defmodule Blip.Parser do
   import NimbleParsec
 
   @types %{

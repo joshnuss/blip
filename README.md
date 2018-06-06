@@ -1,13 +1,13 @@
-# StatsD Server
+# Blip Metric Server
 
 A fault-tolerant and concurrent StatsD server that follows the [specification](https://github.com/etsy/statsd/blob/master/docs/metric_types.md)
 
-![Supervision Tree](https://raw.githubusercontent.com/joshnuss/elixir-statsd/master/supervision-tree.jpg)
+![Supervision Tree](https://raw.githubusercontent.com/joshnuss/blip/master/supervision-tree.jpg)
 
 ## Installation
 
 ```
-mix escript.install github joshnuss/elixir-statsd
+mix escript.install github joshnuss/blip
 ```
 
 ## Running
@@ -15,13 +15,13 @@ mix escript.install github joshnuss/elixir-statsd
 To run on port 2052
 
 ```
-./statsd 2052
+./blip 2052
 ```
 
 ### Running on multiple ports
 
 ```
-./statsd 2052 2053
+./blip 2052 2053
 ```
 
 ## Testing
