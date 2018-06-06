@@ -15,13 +15,13 @@ mix escript.install github joshnuss/blip
 To run on port 2052
 
 ```
-./blip 2052
+blip 2052
 ```
 
 ### Running on multiple ports
 
 ```
-./blip 2052 2053
+blip 2052 2053
 ```
 
 ## Testing
