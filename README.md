@@ -1,6 +1,6 @@
 # Blip StatsD Server
 
-A fault-tolerant and concurrent StatsD server that follows the [specification](https://github.com/etsy/statsd/blob/master/docs/metric_types.md)
+A fault-tolerant and concurrent StatsD server that follows the [StatsD specification](https://github.com/etsy/statsd/blob/master/docs/metric_types.md)
 
 ![Supervision Tree](https://raw.githubusercontent.com/joshnuss/blip/master/supervision-tree.jpg)
 
