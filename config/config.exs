@@ -1,5 +1,5 @@
 use Mix.Config
 
-config :statsd,
+config :blip,
   port: 2052,
   flush_period: 1000
