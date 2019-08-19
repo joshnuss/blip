@@ -39,7 +39,13 @@ defmodule Blip do
 
       _ ->
         name = {:via, Registry, {Blip.Registry, tag}}
-        DynamicSupervisor.start_child(Blip.Metric.Supervisor, {mod, name})
+        case DynamicSupervisor.start_child(Blip.Metric.Supervisor, {mod, name}) do
+          {:ok, pid} ->
+            {:ok, pid}
+
+          {:error, {:already_started, pid}} ->
+            {:ok, pid}
+        end
     end
   end
 end
