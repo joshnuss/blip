@@ -9,7 +9,7 @@ defmodule Blip.UDPServer do
     :gen_udp.open(port, [:binary, active: true])
   end
 
-  def handle_info({:udp, socket, _address, _port, data}, socket) do
+  def handle_info({:udp, socket, _address, _port, data}, _socket) do
     Blip.record_text(data)
 
     {:noreply, socket}
