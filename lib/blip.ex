@@ -6,7 +6,7 @@ defmodule Blip do
     timing: Blip.Metric.Timing,
   }
 
-  def record({type, name, count, tags}) do
+  def record({type, name, count, _tags}) do
     module = @types[type]
 
     {:ok, pid} = find_or_create(module, name)

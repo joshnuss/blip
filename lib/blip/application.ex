@@ -4,7 +4,7 @@ defmodule Blip.Application do
   use Application
 
   def start(_type, _args) do
-    children = sockets ++ [
+    children = sockets() ++ [
       {Registry, keys: :unique, name: Blip.Registry},
       {DynamicSupervisor, strategy: :one_for_one, name: Blip.Metric.Supervisor},
       {Blip.Backend, []}
